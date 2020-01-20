@@ -71,10 +71,10 @@ carteira_ts_sharpe['Sharpe_MV'] = carteira_ts_sharpe['Sharpe_MV'].bfill()
 carteira_ts_sharpe['Fund_Prop'] = carteira_ts_sharpe.iloc[:,1].rolling(len(carteira_ts_sharpe),min_periods=win_ma).mean()/n_carteira
 carteira_ts_sharpe.retorno = carteira_ts_sharpe.retorno.cumsum()
 
-carteira_ts_ret['Ret_MV'] =52*carteira_ts_ret.loc[:,'retorno'].rolling(len(carteira_ts_sharpe),min_periods=win_ma).mean()
-carteira_ts_ret['Sharpe_MV'] =carteira_ts_ret['Ret_MV'] /(np.sqrt(52)*carteira_ts_sharpe.loc[:,'retorno'].rolling(len(carteira_ts_sharpe),min_periods=win_ma).std())
+carteira_ts_ret['Ret_MV'] =52*carteira_ts_ret.loc[:,'retorno'].rolling(len(carteira_ts_ret),min_periods=win_ma).mean()
+carteira_ts_ret['Sharpe_MV'] =carteira_ts_ret['Ret_MV'] /(np.sqrt(52)*carteira_ts_ret.loc[:,'retorno'].rolling(len(carteira_ts_ret),min_periods=win_ma).std())
 carteira_ts_ret['Sharpe_MV'] = carteira_ts_ret['Sharpe_MV'].bfill()
-carteira_ts_ret['Fund_Prop'] = carteira_ts_ret.iloc[:,1].rolling(len(carteira_ts_sharpe),min_periods=win_ma).mean()/n_carteira
+carteira_ts_ret['Fund_Prop'] = carteira_ts_ret.iloc[:,1].rolling(len(carteira_ts_ret),min_periods=win_ma).mean()/n_carteira
 carteira_ts_ret.retorno = carteira_ts_ret.retorno.cumsum()
 
 # Plot
@@ -100,10 +100,11 @@ def plot_frame(t_i):
     ax.clear()
     ax.set_xlim(xLim[0], xLim[1])
     ax.set_ylim(yLim[0], yLim[1])
+    plt.ylabel('Rentabilidade simulada')
     ax.plot(carteira_ts_ret.iloc[:t_i, 0], label="Retorno", color=color_list[0])
     ax.plot(carteira_ts_sharpe.iloc[:t_i, 0], label="Sharpe", color=color_list[1])
     plt.text(pos1[0], pos1[1], "RESULTADO", color=color_list[0], fontweight='bold', size=18)
-    plt.text(pos2[0], pos2[1], "CONSISTENCIA", color=color_list[1], fontweight='bold', size=18)
+    plt.text(pos2[0], pos2[1], "CONSISTÊNCIA", color=color_list[1], fontweight='bold', size=18)
     if t_i > win_ma:
         plt.text(pos1[0]+addX[0],pos1[1],f"Sharpe: {carteira_ts_ret.Sharpe_MV.iloc[t_i]:4.02f}",color=color_list[0],fontweight='bold',size=16)
         plt.text(pos1[0]+addX[1],pos1[1],f"{fund_name}: {100*carteira_ts_ret.Fund_Prop.iloc[t_i]:.0f}%",color=color_list[0],fontweight='bold',size=16)
