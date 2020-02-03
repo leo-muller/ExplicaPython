@@ -1,15 +1,3 @@
-"""
-A briga dos dois maiores gestores da historia: diversificação.
-
-Buffett é claro, “Diversification is a protection against ignorance,[It] makes very little sense for those who know what they’re doing.”
-
-Em contrapartida "Renaissance has gathered, the firm only profits on barely more than 50 percent of its trades, a sign of how challenging it is to try to beat the market—and how foolish it is for most investors to try."
-
-São duas formas de investir, se dedicar muita a analisar poucos investimenos onde você tenha alta acertividade. Ou procurar investimentos marginalmente melhnores que jogar moeda e diversificar.
-
-Qual a melhor? Depende, vamos supor que o Buffet faça 5 investimentos por ano. Supondo que o Simons acerte 51% do tempo, quantos trades ele tem que fazer para barrar o Buffet?
-
-"""
 import numpy as np
 import pandas as pd
 ret_pos = 0.1
